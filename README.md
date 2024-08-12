@@ -42,9 +42,13 @@ El modelo ha sido implementado como una aplicación web utilizando Django, permi
 ## Instalación y Uso
 
 1. Clone este repositorio
-2. Instale las dependencias: `pip install -r requirements.txt`
-3. Ejecute el servidor Django: `python manage.py runserver`
-4. Acceda a la aplicación en `http://127.0.0.1:8000/`
+2. Instale las dependencias: pip install -r requirements.txt
+3. Ejecute la aplicación Streamlit: streamlit run app.py
+4 .La aplicación se abrirá automáticamente en su navegador predeterminado
+
+Despliegue
+La aplicación está desplegada y disponible para su uso en:
+https://malaria-detector-siskzoaxsmm7ucgetk9eae.streamlit.app/
 
 ## Trabajo Futuro
 
