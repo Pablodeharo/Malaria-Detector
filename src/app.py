@@ -129,18 +129,3 @@ with col2:
             st.error(f'Prediction: Infected with malaria (Probability: {prediction:.2f})')
         else:
             st.success(f'Prediction: Not infected (Probability: {1-prediction:.2f})')
-
-# Configuration information and instructions
-st.sidebar.title("Configuration Information")
-st.sidebar.info(f"""
-Current configuration:
-- Model: The model file should be named '{MODEL_FILENAME}' and be in the main directory or in a 'src' subdirectory.
-- Sample images folder: {SAMPLE_IMG_DIR}
-- Banner image: The banner should be named '{BANNER_FILENAME}' and be in an 'assets' folder.
-
-Please ensure that:
-1. The model file ({MODEL_FILENAME}) is in the correct location.
-2. The sample images folder contains the images you want to use for testing.
-3. The images are in jpg, png, or jpeg format.
-4. The banner image is in the assets folder.
-""")
