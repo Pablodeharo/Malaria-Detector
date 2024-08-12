@@ -57,6 +57,8 @@ El modelo ha sido implementado como una aplicación web utilizando Django, permi
 Para una explicación más profunda del proyecto, metodología y resultados, consulte:
 - https://tiny-citrine-a6e.notion.site/Detecci-n-de-Malaria-mediante-Inteligencia-Artificial-725da3ccc5c84b99bb67dbdc15ec95da
 
+## Despliege del modelo APP
+- https://malaria-detector-siskzoaxsmm7ucgetk9eae.streamlit.app/
 
 ## Contacto
 
