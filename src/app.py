@@ -6,15 +6,38 @@ import numpy as np
 import os
 from PIL import Image
 
-# Load the model
-MODEL_PATH = r'C:\Users\lenovo\Desktop\Malaria Detection\Malaria Detector\src\mi_modelo.h5'
-model = load_model(MODEL_PATH)
+# Model loading
+MODEL_FILENAME = 'mi_modelo.h5'
+MODEL_PATHS = [
+    MODEL_FILENAME,  # Try to load from the current directory first
+    os.path.join('src', MODEL_FILENAME),  # Then try the 'src' subdirectory
+    os.path.join(os.path.dirname(__file__), MODEL_FILENAME),  # Then try the script's directory
+    os.path.join(os.path.dirname(__file__), 'src', MODEL_FILENAME)  # Finally, try 'src' in the script's directory
+]
+
+@st.cache_resource
+def load_model_cached():
+    for path in MODEL_PATHS:
+        if os.path.exists(path):
+            return load_model(path)
+    raise FileNotFoundError(f"Model file '{MODEL_FILENAME}' not found in any of the expected locations.")
+
+try:
+    model = load_model_cached()
+    st.success("Model loaded successfully!")
+except FileNotFoundError as e:
+    st.error(f"Error loading model: {e}")
+    st.stop()
 
 # Sample images directory
-SAMPLE_IMG_DIR = r'C:\Users\lenovo\Desktop\Malaria Detection\Malaria Detector\src\image_sample'
+SAMPLE_IMG_DIR = 'image_sample'
 
 # Banner image path
-BANNER_PATH = r'C:\Users\lenovo\Desktop\Malaria Detection\Malaria Detector\src\assets\banner.jpeg'
+BANNER_FILENAME = 'banner.jpeg'
+BANNER_PATHS = [
+    os.path.join('assets', BANNER_FILENAME),
+    os.path.join(os.path.dirname(__file__), 'assets', BANNER_FILENAME)
+]
 
 def preprocess_image(img):
     img = image.img_to_array(img)
@@ -31,7 +54,16 @@ def resize_image(img, max_size=(300, 300)):
     return img
 
 # Display banner
-st.image(BANNER_PATH, use_column_width=True)
+banner_displayed = False
+for path in BANNER_PATHS:
+    if os.path.exists(path):
+        st.image(path, use_column_width=True)
+        banner_displayed = True
+        break
+if not banner_displayed:
+    st.warning("Banner image not found. Please check the path.")
+
+st.title('Malaria Detector')
 
 # Create three columns for the buttons
 col1, col2, col3 = st.columns(3)
@@ -66,8 +98,6 @@ with col3:
     """
     st.markdown(notion_html, unsafe_allow_html=True)
 
-st.title('Malaria Detector')
-
 # Option to choose between uploading image or using sample
 option = st.radio(
     "Choose an option:",
@@ -100,3 +130,17 @@ with col2:
         else:
             st.success(f'Prediction: Not infected (Probability: {1-prediction:.2f})')
 
+# Configuration information and instructions
+st.sidebar.title("Configuration Information")
+st.sidebar.info(f"""
+Current configuration:
+- Model: The model file should be named '{MODEL_FILENAME}' and be in the main directory or in a 'src' subdirectory.
+- Sample images folder: {SAMPLE_IMG_DIR}
+- Banner image: The banner should be named '{BANNER_FILENAME}' and be in an 'assets' folder.
+
+Please ensure that:
+1. The model file ({MODEL_FILENAME}) is in the correct location.
+2. The sample images folder contains the images you want to use for testing.
+3. The images are in jpg, png, or jpeg format.
+4. The banner image is in the assets folder.
+""")
