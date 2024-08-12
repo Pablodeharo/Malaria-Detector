@@ -71,7 +71,7 @@ col1, col2, col3 = st.columns(3)
 # GitHub button
 with col1:
     github_html = """
-    <a href="https://github.com/Pablodeharo/Phishing-Domain-Detection" target="_blank">
+    <a href="https://github.com/Pablodeharo/Malaria-Detector" target="_blank">
         <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" width="30" height="30">
         GitHub
     </a>
@@ -91,7 +91,7 @@ with col2:
 # Documentation (Notion) button
 with col3:
     notion_html = """
-    <a href="https://tiny-citrine-a6e.notion.site/Phishing-Domain-Detection-a9c3c58fc27746b586d43352e4ebe075" target="_blank">
+    <a href="https://tiny-citrine-a6e.notion.site/Detecci-n-de-Malaria-mediante-Inteligencia-Artificial-725da3ccc5c84b99bb67dbdc15ec95da" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" width="30" height="30">
         Documentation
     </a>
